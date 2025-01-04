@@ -16,10 +16,17 @@ function passwordCheck(req, res, next) {
   }
   next();
 }
+app.use(passwordCheck);
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  console.log(__dirname + "/public/index.html");
+  res.sendFile(__dirname + "/public/index.html");
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+app.post("/check", (req, res) => {
+  if (userIsAuthorised) {
+    res.sendFile(__dirname + "/public/secret.html");
+  } else {
+    res.sendFile(__dirname + "/public/index.html");
+    res.redirect("/");
+  }
 });
