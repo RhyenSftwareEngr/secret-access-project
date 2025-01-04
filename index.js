@@ -30,3 +30,6 @@ app.post("/check", (req, res) => {
     res.redirect("/");
   }
 });
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
